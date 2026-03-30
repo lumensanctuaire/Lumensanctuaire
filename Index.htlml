@@ -1,1 +1,914 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMEN — Clarifier l’esprit, lire le réel</title>
+  <meta name="description" content="LUMEN est un système éditorial de clarification intérieure, de lecture du réel et de transmission." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <style>
+    :root{
+      --bg:#0a0d12;
+      --bg-soft:#11161d;
+      --panel:#121922;
+      --panel-2:#161f2a;
+      --text:#e8e2d7;
+      --muted:#a9a294;
+      --gold:#ccb07a;
+      --gold-soft:rgba(204,176,122,0.14);
+      --line:rgba(204,176,122,0.16);
+      --white-line:rgba(255,255,255,0.08);
+      --shadow:0 18px 60px rgba(0,0,0,0.35);
+      --radius:22px;
+      --max:1180px;
+    }
+
+    *{
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(circle at top, rgba(204,176,122,0.08), transparent 28%),
+        linear-gradient(180deg, #090c11 0%, #0a0d12 40%, #0c1117 100%);
+      color:var(--text);
+      font-family:'Inter', sans-serif;
+      line-height:1.7;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto;
+    }
+
+    .section{
+      padding:110px 0;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(10,13,18,0.72);
+      border-bottom:1px solid var(--white-line);
+    }
+
+    .nav-wrap{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+
+    .brand-top{
+      font-family:'Cinzel', serif;
+      letter-spacing:.22em;
+      font-size:.98rem;
+      color:#f3ecdf;
+    }
+
+    .brand-bottom{
+      font-size:.78rem;
+      color:var(--muted);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      font-size:.95rem;
+      color:var(--muted);
+      transition:.25s ease;
+    }
+
+    .nav-links a:hover{
+      color:var(--gold);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 22px;
+      border-radius:999px;
+      border:1px solid rgba(204,176,122,0.24);
+      background:transparent;
+      color:var(--gold);
+      font-size:.95rem;
+      font-weight:500;
+      transition:.28s ease;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(204,176,122,0.52);
+      background:rgba(204,176,122,0.06);
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, rgba(204,176,122,0.18), rgba(204,176,122,0.08));
+      color:#fff2d8;
+      border-color:rgba(204,176,122,0.34);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(180deg, rgba(204,176,122,0.24), rgba(204,176,122,0.11));
+    }
+
+    .hero{
+      min-height:calc(100vh - 78px);
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 70% 22%, rgba(204,176,122,0.10), transparent 16%),
+        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.035), transparent 30%);
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:34px;
+      align-items:end;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:18px;
+      font-size:.78rem;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+
+    h1,h2,h3{
+      margin:0;
+      font-family:'Cinzel', serif;
+      font-weight:400;
+      line-height:1.15;
+    }
+
+    h1{
+      font-size:clamp(3rem, 7vw, 5.8rem);
+      letter-spacing:.10em;
+      color:#f4ede0;
+    }
+
+    h2{
+      font-size:clamp(1.7rem, 4vw, 3rem);
+      color:#f3ead8;
+      margin-bottom:18px;
+    }
+
+    h3{
+      font-size:1.18rem;
+      color:#f5ecdc;
+      margin-bottom:10px;
+    }
+
+    .hero-copy{
+      padding:22px 0;
+    }
+
+    .lead{
+      margin-top:24px;
+      max-width:760px;
+      font-size:1.24rem;
+      color:#ddd5c7;
+      font-family:'Cormorant Garamond', serif;
+    }
+
+    .sublead{
+      max-width:700px;
+      margin-top:22px;
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:30px;
+    }
+
+    .editorial-panel{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border:1px solid var(--white-line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-top{
+      padding:22px 24px;
+      border-bottom:1px solid var(--white-line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .panel-tag{
+      font-size:.76rem;
+      color:var(--gold);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .panel-no{
+      font-family:'Cinzel', serif;
+      color:#f0e4ca;
+      font-size:1rem;
+    }
+
+    .panel-body{
+      padding:26px 24px 28px;
+    }
+
+    .mini-list{
+      display:grid;
+      gap:16px;
+    }
+
+    .mini-item{
+      padding-bottom:14px;
+      border-bottom:1px solid rgba(255,255,255,0.07);
+    }
+
+    .mini-item:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .mini-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:var(--gold);
+      font-size:.92rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-weight:600;
+    }
+
+    .mini-item span{
+      color:#d8cfbf;
+      font-size:.98rem;
+    }
+
+    .divider{
+      width:min(calc(100% - 32px), 1240px);
+      margin:0 auto;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(204,176,122,0.26), transparent);
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      align-items:start;
+    }
+
+    .card{
+      padding:30px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border:1px solid var(--white-line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .quote{
+      margin-top:22px;
+      padding-left:18px;
+      border-left:2px solid var(--gold);
+      color:#eee3cf;
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.22rem;
+    }
+
+    .principles{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:16px;
+      margin-top:28px;
+    }
+
+    .principle{
+      padding:18px 18px 16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(204,176,122,0.04);
+    }
+
+    .principle strong{
+      display:block;
+      color:var(--gold);
+      margin-bottom:5px;
+      font-size:.92rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .principle span{
+      color:#d8cfbf;
+      font-size:.98rem;
+    }
+
+    .transition{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:36px;
+    }
+
+    .state{
+      padding:28px;
+      border-radius:24px;
+      border:1px solid var(--white-line);
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+    }
+
+    .arrow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+      font-size:2rem;
+      opacity:.85;
+    }
+
+    .products-head{
+      max-width:780px;
+      margin-bottom:38px;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+    }
+
+    .product{
+      display:flex;
+      flex-direction:column;
+      padding:24px 22px;
+      border-radius:22px;
+      border:1px solid var(--white-line);
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      box-shadow:var(--shadow);
+      transition:.28s ease;
+    }
+
+    .product:hover{
+      transform:translateY(-4px);
+      border-color:rgba(204,176,122,0.26);
+    }
+
+    .product.featured{
+      background:linear-gradient(180deg, rgba(204,176,122,0.10), rgba(255,255,255,0.02));
+      border-color:rgba(204,176,122,0.24);
+    }
+
+    .badge{
+      align-self:flex-start;
+      margin-bottom:14px;
+      padding:6px 11px;
+      border-radius:999px;
+      border:1px solid rgba(204,176,122,0.24);
+      color:var(--gold);
+      font-size:.73rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .price{
+      margin:12px 0 14px;
+      color:#f1deba;
+      font-family:'Cinzel', serif;
+      font-size:1.55rem;
+    }
+
+    .product p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    .product ul{
+      margin:0 0 22px;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+      color:#ddd3c1;
+      font-size:.94rem;
+    }
+
+    .product ul li::before{
+      content:"— ";
+      color:var(--gold);
+    }
+
+    .product .btn{
+      margin-top:auto;
+      width:100%;
+    }
+
+    .reading-room{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .input,
+    textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      padding:16px 16px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.08);
+      font-family:'Inter', sans-serif;
+      font-size:.96rem;
+    }
+
+    textarea{
+      resize:vertical;
+      min-height:130px;
+    }
+
+    .form{
+      display:grid;
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .tiny{
+      font-size:.88rem;
+      color:var(--muted);
+      margin-top:12px;
+    }
+
+    .faq{
+      display:grid;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .faq-item{
+      padding:24px;
+      border-radius:18px;
+      border:1px solid var(--white-line);
+      background:linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.012));
+    }
+
+    .cta{
+      text-align:center;
+      padding:42px 28px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at top, rgba(204,176,122,0.08), transparent 35%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      box-shadow:var(--shadow);
+    }
+
+    .footer{
+      padding:34px 0 56px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .fade-up{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+
+    .fade-up.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media (max-width:1100px){
+      .hero-grid,
+      .split,
+      .reading-room{
+        grid-template-columns:1fr;
+      }
+
+      .products{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width:760px){
+      .section{
+        padding:84px 0;
+      }
+
+      .nav-wrap{
+        padding:14px 0;
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .nav-links{
+        gap:14px;
+      }
+
+      .products,
+      .principles,
+      .transition{
+        grid-template-columns:1fr;
+      }
+
+      .arrow{
+        transform:rotate(90deg);
+        min-height:24px;
+      }
+
+      .hero{
+        min-height:auto;
+        padding:42px 0 50px;
+      }
+
+      h1{
+        font-size:2.7rem;
+      }
+
+      .lead{
+        font-size:1.12rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <span class="brand-top">LUMEN</span>
+        <span class="brand-bottom">Clarifier • Lire • Transmettre</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#systeme">Le système</a>
+        <a href="#lecture">Lecture</a>
+        <a href="#codex">Le Codex</a>
+        <a href="#entree">Entrée</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-copy fade-up">
+          <span class="eyebrow">Éditorial premium • pensée structurée</span>
+          <h1>LUMEN</h1>
+          <p class="lead">
+            Un espace pour clarifier l’esprit, mieux lire le réel,
+            et retrouver une direction plus juste dans un monde saturé.
+          </p>
+          <p class="sublead">
+            LUMEN n’ajoute pas du bruit. Il organise, hiérarchise et rend lisible.
+            Son rôle n’est pas d’impressionner, mais d’aider l’humain à respirer, comprendre et avancer.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#entree" class="btn btn-primary">Recevoir la Salle I</a>
+            <a href="#codex" class="btn">Découvrir le Codex</a>
+          </div>
+        </div>
+
+        <aside class="editorial-panel fade-up">
+          <div class="panel-top">
+            <span class="panel-tag">Collection</span>
+            <span class="panel-no">Édition I</span>
+          </div>
+          <div class="panel-body">
+            <div class="mini-list">
+              <div class="mini-item">
+                <strong>Comprendre</strong>
+                <span>Structurer la pensée et sortir de la confusion.</span>
+              </div>
+              <div class="mini-item">
+                <strong>Agir</strong>
+                <span>Lire les dynamiques du réel et retrouver un axe.</span>
+              </div>
+              <div class="mini-item">
+                <strong>Transmettre</strong>
+                <span>Incarner une vision claire et la faire circuler avec justesse.</span>
+              </div>
+              <div class="mini-item">
+                <strong>Cycle complet</strong>
+                <span>Une trajectoire cohérente pensée comme un ensemble.</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section" id="systeme">
+      <div class="container split">
+        <div class="card fade-up">
+          <span class="eyebrow">Le système</span>
+          <h2>Pourquoi LUMEN existe</h2>
+          <p>
+            Aujourd’hui, presque tout circule. Les idées, les analyses, les opinions, les intuitions.
+            Mais peu de choses sont vraiment ordonnées.
+          </p>
+          <p class="muted">
+            LUMEN est pensé comme une maison d’édition intérieure :
+            un lieu où l’on trie, où l’on nomme, où l’on relie, et où l’on remet de la cohérence là où il n’y avait que dispersion.
+          </p>
+          <p class="quote">
+            Ce site n’est pas conçu pour impressionner l’ego.  
+            Il est conçu pour apaiser le regard et redonner une structure.
+          </p>
+        </div>
+
+        <div class="card fade-up">
+          <span class="eyebrow">Pour l’humain</span>
+          <h2>Une expérience plus calme et plus nette</h2>
+          <div class="principles">
+            <div class="principle">
+              <strong>Lisibilité</strong>
+              <span>Une interface qui respire et n’agresse pas.</span>
+            </div>
+            <div class="principle">
+              <strong>Présence</strong>
+              <span>Un ton qui rassure au lieu de forcer.</span>
+            </div>
+            <div class="principle">
+              <strong>Structure</strong>
+              <span>Chaque section a un rôle clair.</span>
+            </div>
+            <div class="principle">
+              <strong>Direction</strong>
+              <span>Le visiteur comprend où aller, sans confusion.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section" id="lecture">
+      <div class="container fade-up">
+        <span class="eyebrow">Salle I</span>
+        <h2>Les 7 piliers d’une lecture plus juste</h2>
+        <p class="muted" style="max-width:760px;">
+          Tu ne manques pas forcément d’informations. Tu manques parfois de structure pour leur donner une place juste.
+        </p>
+
+        <div class="principles" style="margin-top:34px;">
+          <div class="principle"><strong>Voir</strong><span>Regarder sans projeter.</span></div>
+          <div class="principle"><strong>Distinguer</strong><span>Ne pas tout mélanger.</span></div>
+          <div class="principle"><strong>Nommer</strong><span>Clarifier par les mots.</span></div>
+          <div class="principle"><strong>Relier</strong><span>Comprendre les liens.</span></div>
+          <div class="principle"><strong>Mesurer</strong><span>Éviter les extrêmes.</span></div>
+          <div class="principle"><strong>Vérifier</strong><span>Ne pas croire aveuglément.</span></div>
+        </div>
+
+        <div class="quote" style="margin-top:28px; max-width:760px;">
+          Tu ne contrôles pas le monde.  
+          Mais tu peux apprendre à mieux lire la manière dont il se présente à toi.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="container fade-up">
+        <span class="eyebrow">Transformation</span>
+        <h2>Du flou à la direction</h2>
+
+        <div class="transition">
+          <div class="state">
+            <h3>Avant</h3>
+            <p class="muted">Tu absorbes beaucoup de choses.</p>
+            <p class="muted">Tu ressens, tu vois, tu captes.</p>
+            <p class="muted">Mais tout n’est pas encore hiérarchisé.</p>
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="state">
+            <h3>Après</h3>
+            <p class="muted">Tu distingues mieux.</p>
+            <p class="muted">Tu lis plus calmement.</p>
+            <p class="muted">Tu avances avec un axe plus net.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section" id="codex">
+      <div class="container fade-up">
+        <div class="products-head">
+          <span class="eyebrow">Le Codex</span>
+          <h2>Une collection conçue comme une progression</h2>
+          <p class="muted">
+            Chaque volume répond à une étape précise. Ensemble, ils forment une architecture complète.
+          </p>
+        </div>
+
+        <div class="products">
+          <article class="product">
+            <span class="badge">Entrée</span>
+            <h3>Comprendre</h3>
+            <div class="price">47€</div>
+            <p>Le premier volume pour remettre de l’ordre et clarifier les bases.</p>
+            <ul>
+              <li>Structurer la pensée</li>
+              <li>Sortir de la confusion</li>
+              <li>Poser une base solide</li>
+            </ul>
+            <a href="#" class="btn">Accéder</a>
+          </article>
+
+          <article class="product">
+            <span class="badge">Discernement</span>
+            <h3>Agir</h3>
+            <div class="price">67€</div>
+            <p>Une lecture du réel pour mieux discerner et se positionner.</p>
+            <ul>
+              <li>Lire les dynamiques</li>
+              <li>Retrouver un axe</li>
+              <li>Décider plus juste</li>
+            </ul>
+            <a href="#" class="btn">Accéder</a>
+          </article>
+
+          <article class="product">
+            <span class="badge">Transmission</span>
+            <h3>Transmettre</h3>
+            <div class="price">87€</div>
+            <p>Un volume pensé pour incarner une vision et la partager avec précision.</p>
+            <ul>
+              <li>Parler plus juste</li>
+              <li>Incarner une vision</li>
+              <li>Transmettre l’essentiel</li>
+            </ul>
+            <a href="#" class="btn">Accéder</a>
+          </article>
+
+          <article class="product featured">
+            <span class="badge">Intégral</span>
+            <h3>Cycle complet</h3>
+            <div class="price">147€</div>
+            <p>L’ensemble du parcours dans une trajectoire éditoriale cohérente.</p>
+            <ul>
+              <li>Comprendre + Agir + Transmettre</li>
+              <li>Vision d’ensemble</li>
+              <li>Meilleure entrée globale</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Accéder</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section" id="entree">
+      <div class="container reading-room">
+        <div class="card fade-up">
+          <span class="eyebrow">Entrée gratuite</span>
+          <h2>Recevoir la Salle I</h2>
+          <p>
+            Une première lecture pour découvrir le ton, la structure et la qualité du système LUMEN.
+          </p>
+
+          <form class="form">
+            <input class="input" type="text" placeholder="Ton prénom">
+            <input class="input" type="email" placeholder="Ton email">
+            <textarea placeholder="Tu peux écrire : Je souhaite recevoir la Salle I"></textarea>
+            <button type="button" class="btn btn-primary">Recevoir la Salle I</button>
+          </form>
+
+          <p class="tiny">
+            Tu pourras ensuite brancher ici un vrai formulaire email ou un outil comme Brevo ou Formspree.
+          </p>
+        </div>
+
+        <div class="card fade-up">
+          <span class="eyebrow">FAQ</span>
+          <h2>Questions fréquentes</h2>
+
+          <div class="faq">
+            <div class="faq-item">
+              <h3>Est-ce un site spirituel ?</h3>
+              <p class="muted">LUMEN est avant tout un espace de clarification, de lecture et de structuration.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3>Comment seront reçus les livres ?</h3>
+              <p class="muted">En format PDF premium, puis éventuellement avec d’autres formats à venir.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3>Par quoi commencer ?</h3>
+              <p class="muted">La Salle I pour entrer doucement, ou le Cycle complet pour une vision globale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="container fade-up">
+        <div class="cta">
+          <span class="eyebrow">Entrer dans LUMEN</span>
+          <h2>Un site plus noble, plus clair, plus humain.</h2>
+          <p class="muted" style="max-width:760px; margin:0 auto 26px;">
+            Cette version est pensée pour mieux accueillir, mieux orienter et mieux convertir, sans perdre la profondeur du projet.
+          </p>
+          <div class="hero-actions" style="justify-content:center;">
+            <a href="#entree" class="btn">Recevoir la Salle I</a>
+            <a href="#codex" class="btn btn-primary">Voir la collection</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    LUMEN — Clarifier l’esprit, lire le réel, transmettre avec justesse.
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el=>{
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
