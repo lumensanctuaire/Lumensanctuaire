@@ -46,7 +46,7 @@ export default function Header() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          background: scrolled || menuOpen ? 'rgba(5,7,13,0.97)' : 'transparent',
+          background: scrolled || menuOpen ? 'rgba(2,4,10,0.97)' : 'transparent',
           backdropFilter: scrolled || menuOpen ? 'blur(16px)' : 'none',
           borderBottom: scrolled || menuOpen ? '1px solid rgba(207,174,106,0.1)' : '1px solid transparent',
         }}
@@ -120,7 +120,7 @@ export default function Header() {
         <nav
           className="absolute top-[68px] left-0 right-0"
           style={{
-            background: 'rgba(5,7,13,0.97)',
+            background: 'rgba(2,4,10,0.97)',
             borderBottom: '1px solid rgba(207,174,106,0.1)',
             backdropFilter: 'blur(16px)',
             transform: menuOpen ? 'translateY(0)' : 'translateY(-8px)',

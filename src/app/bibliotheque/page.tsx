@@ -177,7 +177,7 @@ export default function BibliothequePage() {
             ← Les Chambres
           </Link>
           <Link
-            href="/figures"
+            href="/chambres/figures"
             className="font-cinzel text-[10px] tracking-[0.25em] uppercase transition-colors duration-300 hover:text-[#CFAE6A]"
             style={{ color: 'rgba(207,174,106,0.4)' }}
           >

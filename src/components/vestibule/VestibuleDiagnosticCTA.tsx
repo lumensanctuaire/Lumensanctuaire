@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import ThresholdLine from '@/components/ThresholdLine'
 
 export default function VestibuleDiagnosticCTA() {
@@ -45,21 +46,21 @@ export default function VestibuleDiagnosticCTA() {
           Pour ne pas entrer par la mauvaise chambre.
         </p>
 
-        <a
+        <Link
           href="/diagnostic"
           className="btn-primary inline-flex items-center font-cinzel text-[11px] tracking-[0.22em] uppercase px-10 py-4"
         >
           Commencer le diagnostic
-        </a>
+        </Link>
 
         <div style={{ marginTop: '2rem' }}>
-          <a
+          <Link
             href="/entrer"
             className="font-cinzel text-[10px] tracking-[0.25em] uppercase transition-colors duration-300 hover:text-[#CFAE6A]"
             style={{ color: 'rgba(207,174,106,0.35)' }}
           >
             Ou entrer directement dans le sanctuaire →
-          </a>
+          </Link>
         </div>
       </div>
     </section>
