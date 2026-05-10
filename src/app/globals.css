@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #05070D;
-  --bg-secondary: #0B1220;
-  --bg-accent: #101826;
   --gold: #CFAE6A;
   --gold-soft: #D8B980;
   --text-primary: #E8E2D3;
@@ -34,22 +31,12 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #05070D; }
+::-webkit-scrollbar-track { background: #02040A; }
 ::-webkit-scrollbar-thumb {
   background: rgba(207, 174, 106, 0.25);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover { background: rgba(207, 174, 106, 0.45); }
-
-/* Gold shimmer text */
-.gold-shimmer {
-  background: linear-gradient(90deg, #CFAE6A 0%, #F0D896 40%, #CFAE6A 60%, #D8B980 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
-}
 
 /* Premium card hover */
 .card-lift {
@@ -73,12 +60,6 @@ body {
   box-shadow: 0 0 40px rgba(0,0,0,0.5), 0 0 20px rgba(207,174,106,0.08), inset 0 0 30px rgba(207,174,106,0.025);
 }
 
-/* Progress bar */
-.progress-bar-fill {
-  background: linear-gradient(90deg, #CFAE6A, #D8B980);
-  border-radius: 100px;
-}
-
 /* Gold divider line */
 .gold-divider {
   height: 1px;
@@ -88,7 +69,7 @@ body {
 /* CTA button glow */
 .btn-primary {
   background: #CFAE6A;
-  color: #05070D;
+  color: #02040A;
   transition: all 0.3s ease;
   box-shadow: 0 0 30px rgba(207,174,106,0.2);
 }
@@ -121,30 +102,8 @@ body {
   vertical-align: middle;
 }
 
-/* Keyframes */
-@keyframes shimmer {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
+/* Keyframes — uniquement entrée ponctuelle, aucune boucle */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes breathe {
-  0%, 100% { opacity: 0.018; }
-  50%       { opacity: 0.052; }
-}
-
-@keyframes glow-inner {
-  0%, 100% { opacity: 0.45; }
-  50%       { opacity: 1; }
-}
-
-.geo-breathe {
-  /* animation supprimée — immobilité doctrinale */
-}
-
-.glow-breathe {
-  animation: glow-inner 6s ease-in-out infinite;
+  to   { opacity: 1; transform: translateY(0); }
 }

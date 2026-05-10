@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="fr"
       className={`${cinzel.variable} ${manrope.variable}`}
     >
-      <body className="bg-[#05070D] text-[#E8E2D3] antialiased font-manrope">
+      <body className="bg-[#02040A] text-[#E8E2D3] antialiased font-manrope">
         {children}
       </body>
     </html>

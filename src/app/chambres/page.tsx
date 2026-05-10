@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Header from '@/components/Header'
 import ThresholdLine from '@/components/ThresholdLine'
+import ChamberMark, { type ChamberMarkSlug } from '@/identity/chamberMarks'
 import { chambers } from '@/data/chambers'
 
 export default function ChambresPage() {
@@ -57,19 +58,26 @@ export default function ChambresPage() {
 
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <div>
-                    {/* Dimension label */}
+                    {/* Dimension label + sceau de chambre */}
                     <div className="flex items-center justify-between mb-4">
-                      <span
-                        className="font-cinzel"
-                        style={{
-                          fontSize: '9px',
-                          letterSpacing: '0.38em',
-                          textTransform: 'uppercase',
-                          color: chamber.isOpen ? 'rgba(207,174,106,0.5)' : 'rgba(207,174,106,0.2)',
-                        }}
-                      >
-                        Dim. {chamber.dimension}
-                      </span>
+                      <div className="flex items-center" style={{ gap: '0.6rem' }}>
+                        <ChamberMark
+                          slug={chamber.slug as ChamberMarkSlug}
+                          size={16}
+                          color={chamber.isOpen ? 'rgba(207,174,106,0.5)' : 'rgba(207,174,106,0.2)'}
+                        />
+                        <span
+                          className="font-cinzel"
+                          style={{
+                            fontSize: '9px',
+                            letterSpacing: '0.38em',
+                            textTransform: 'uppercase',
+                            color: chamber.isOpen ? 'rgba(207,174,106,0.5)' : 'rgba(207,174,106,0.2)',
+                          }}
+                        >
+                          Dim. {chamber.dimension}
+                        </span>
+                      </div>
                       {!chamber.isOpen && (
                         <span
                           className="font-cinzel"
@@ -147,8 +155,8 @@ export default function ChambresPage() {
                   }}
                 >
                   <div
-                    className="absolute inset-0 pointer-events-none glow-breathe"
-                    style={{ background: 'radial-gradient(ellipse 70% 55% at 20% 20%, rgba(207,174,106,0.07) 0%, transparent 70%)' }}
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: 'radial-gradient(ellipse 70% 55% at 20% 20%, rgba(207,174,106,0.05) 0%, transparent 70%)' }}
                   />
                   {cardContent}
                 </Link>

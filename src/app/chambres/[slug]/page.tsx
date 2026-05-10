@@ -4,9 +4,17 @@ import { headers } from 'next/headers'
 import Header from '@/components/Header'
 import ThresholdLine from '@/components/ThresholdLine'
 import ConnexionsBlock from '@/components/ConnexionsBlock'
+import ChamberMark, { type ChamberMarkSlug } from '@/identity/chamberMarks'
 import { getChamber } from '@/data/chambers'
 import { lois } from '@/data/chambers/lois'
-import { getLoisPourFigure, getLoisPourLecture } from '@/data/chambers/connexions'
+import {
+  getLoisPourFigure,
+  getLoisPourLecture,
+  getCartesPourFigure,
+  getCartesPourLecture,
+  getDomainesPourFigure,
+  getDomainesPourLecture,
+} from '@/data/chambers/connexions'
 import { ligneeFigures } from '@/data/chambers/figures'
 import { lectures } from '@/data/chambers/lectures'
 import { cartes } from '@/data/chambers/cartes'
@@ -18,15 +26,22 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-function PageHeader({ chamber }: { chamber: { name: string; declaration: string; dimension: string } }) {
+function PageHeader({ chamber }: { chamber: { slug: string; name: string; declaration: string; dimension: string } }) {
   return (
     <div style={{ marginBottom: '4rem' }}>
-      <p
-        className="font-cinzel"
-        style={{ fontSize: '10px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(207,174,106,0.6)', marginBottom: '1.5rem' }}
-      >
-        LUMEN · {chamber.dimension}
-      </p>
+      <div className="flex items-center" style={{ gap: '0.75rem', marginBottom: '1.5rem' }}>
+        <ChamberMark
+          slug={chamber.slug as ChamberMarkSlug}
+          size={18}
+          color="rgba(207,174,106,0.6)"
+        />
+        <p
+          className="font-cinzel"
+          style={{ fontSize: '10px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(207,174,106,0.6)' }}
+        >
+          LUMEN · {chamber.dimension}
+        </p>
+      </div>
       <h1
         className="font-cinzel"
         style={{ fontSize: 'clamp(1.6rem,3vw,2.4rem)', fontWeight: '600', letterSpacing: '0.04em', color: '#E8E2D3', lineHeight: 1.2, marginBottom: '1.5rem' }}
@@ -286,7 +301,11 @@ export default async function ChambrePage({ params }: Props) {
                       <span key={t} className="font-cinzel text-[9px] tracking-[0.28em] uppercase" style={{ color: '#6B5B8E', opacity: 0.7 }}>{t}</span>
                     ))}
                   </div>
-                  <ConnexionsBlock lois={getLoisPourFigure(lignee.slug)} />
+                  <ConnexionsBlock
+                    lois={getLoisPourFigure(lignee.slug)}
+                    cartes={getCartesPourFigure(lignee.slug)}
+                    domaines={getDomainesPourFigure(lignee.slug)}
+                  />
                 </div>
               )
             })}
@@ -341,7 +360,11 @@ export default async function ChambrePage({ params }: Props) {
                       <span key={t} className="font-cinzel text-[9px] tracking-[0.28em] uppercase" style={{ color: '#6B5B8E', opacity: 0.7 }}>{t}</span>
                     ))}
                   </div>
-                  <ConnexionsBlock lois={getLoisPourLecture(lecture.slug)} />
+                  <ConnexionsBlock
+                    lois={getLoisPourLecture(lecture.slug)}
+                    cartes={getCartesPourLecture(lecture.slug)}
+                    domaines={getDomainesPourLecture(lecture.slug)}
+                  />
                 </div>
               )
             })}
@@ -609,6 +632,30 @@ export default async function ChambrePage({ params }: Props) {
                         style={{ fontSize: '13px', fontStyle: 'italic', color: 'rgba(232,226,211,0.32)', lineHeight: 1.85 }}
                       >
                         {loi.exemple}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Interrogation — épine doctrinale, sans label, sans interaction */}
+                  {loi.interrogation && (
+                    <div
+                      style={{
+                        paddingLeft: '24px',
+                        borderLeft: '1px solid rgba(107,91,142,0.35)',
+                        marginTop: '2.25rem',
+                      }}
+                    >
+                      <p
+                        className="font-cinzel"
+                        style={{
+                          fontSize: '13px',
+                          fontStyle: 'italic',
+                          color: 'rgba(232,226,211,0.5)',
+                          lineHeight: 1.8,
+                          letterSpacing: '0.01em',
+                        }}
+                      >
+                        {loi.interrogation}
                       </p>
                     </div>
                   )}

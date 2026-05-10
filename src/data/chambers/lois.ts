@@ -3,6 +3,7 @@ export interface Loi {
   enonce: string
   developpement: string
   exemple?: string
+  interrogation?: string
   connexions?: {
     figures: Array<{ slug: string; nom: string }>
     lectures: Array<{ slug: string; titre: string; auteur: string }>
@@ -19,6 +20,8 @@ export const lois: Loi[] = [
       "La perception sans langage reste impression — vivante, mais non transmissible. Ce qui n'a pas de nom ne peut pas être pensé deux fois de la même manière, ne peut pas être communiqué, ne peut pas être corrigé. Nommer avec précision n'est pas un exercice de style : c'est l'acte fondateur de toute maîtrise. Les organisations qui échouent nomment mal leurs problèmes. Les hommes qui souffrent longtemps nomment mal ce qui leur arrive. Le flou n'est pas une lacune — c'est souvent une protection délibérée. La clarté exige le courage de voir ce qu'on aurait préféré laisser dans l'ombre.",
     exemple:
       "Wittgenstein l'a posé comme axiome : les limites de mon langage sont les limites de mon monde. Ce n'est pas une métaphore — c'est un constat opérationnel. Darwin n'a pas observé plus que les autres naturalistes de son époque ; il a nommé ce que les autres décrivaient. La nomenclature précède la découverte.",
+    interrogation:
+      "Quelle chose, dans ta vie, reste sans nom — précisément parce que la nommer t'obligerait à la traiter ?",
     connexions: {
       figures: [
         { slug: 'examen-du-reel',      nom: "L'Examen du réel" },
@@ -41,6 +44,8 @@ export const lois: Loi[] = [
       "Les événements sont des surfaces. Derrière une crise économique, une loi de comportement humain sous contrainte. Derrière une organisation qui s'effondre, une architecture d'incentives mal posée. Derrière un conflit, une logique de territoire et de rang que les protagonistes eux-mêmes ne perçoivent pas. Comprendre un système, c'est refuser de s'arrêter à ce qu'il affiche — c'est remonter jusqu'à ce qui le contraint réellement. La plupart des erreurs d'analyse consistent à traiter des effets comme des causes, et à répondre à la surface quand le problème est en profondeur.",
     exemple:
       "Tocqueville, décrivant la Révolution française, ne s'attarde pas sur les événements — il cherche la structure. Il trouve : la centralisation progressive de l'État monarchique avait préparé le terrain bien avant la rupture. La forme de la révolution était déjà inscrite dans la structure de l'Ancien Régime. C'est ce niveau de lecture que LUMEN entraîne.",
+    interrogation:
+      "Quel événement récent t'a paru subi — alors qu'une structure que tu refusais de voir le rendait inévitable ?",
     connexions: {
       figures: [
         { slug: 'strategie-du-flux', nom: 'La Stratégie du flux' },
@@ -64,6 +69,8 @@ export const lois: Loi[] = [
       "Il y a une logique d'économie dans le rang : ce qui a besoin de se déclarer révèle par là même son insécurité. La puissance réelle n'argumente pas sa puissance — elle la manifeste. Les individus qui occupent une position haute dans un système n'ont pas besoin de l'expliquer : leur présence suffit à le signaler. Ce principe vaut pour les institutions, les œuvres, les idées. Un texte qui annonce dès l'ouverture sa propre profondeur n'est généralement pas profond. La déclaration est un substitut à la réalité — utile quand la réalité manque, coûteux quand elle est présente.",
     exemple:
       "Marc Aurèle écrit les Pensées pour lui seul — sans lecteur supposé, sans effet visé. C'est précisément pour cette raison qu'elles tiennent deux mille ans. Taleb nomme cette distinction skin in the game : ce qu'on risque réellement dit plus sur ce qu'on croit vraiment que n'importe quelle déclaration de principe.",
+    interrogation:
+      "À quel endroit déclares-tu un rang que ta présence seule ne suffit pas encore à signaler ?",
     connexions: {
       figures: [
         { slug: 'maitrise-interieure',  nom: 'La Maîtrise intérieure' },

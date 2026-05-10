@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Header from '@/components/Header'
 import ThresholdLine from '@/components/ThresholdLine'
+import ChamberMark, { type ChamberMarkSlug } from '@/identity/chamberMarks'
 
 const corpus = [
   {
@@ -110,12 +111,19 @@ export default function BibliothequePage() {
                     >
                       {section.nom}
                     </h2>
-                    <span
-                      className="font-cinzel shrink-0"
-                      style={{ fontSize: '9px', letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(207,174,106,0.25)', marginTop: '4px' }}
-                    >
-                      Dim. {section.dimension}
-                    </span>
+                    <div className="flex items-center shrink-0" style={{ gap: '0.55rem', marginTop: '4px' }}>
+                      <ChamberMark
+                        slug={section.slug as ChamberMarkSlug}
+                        size={14}
+                        color="rgba(207,174,106,0.35)"
+                      />
+                      <span
+                        className="font-cinzel"
+                        style={{ fontSize: '9px', letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(207,174,106,0.25)' }}
+                      >
+                        Dim. {section.dimension}
+                      </span>
+                    </div>
                   </div>
                   <p
                     className="font-manrope"

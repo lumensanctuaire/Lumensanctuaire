@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Sigil from '@/identity/sigil'
+import ChamberMark from '@/identity/chamberMarks'
 import ThresholdLine from '@/components/ThresholdLine'
 
 export default async function SanctuairePage() {
@@ -114,12 +115,15 @@ export default async function SanctuairePage() {
           }}
         >
           <div className="relative z-10">
-            <h2
-              className="font-cinzel font-semibold"
-              style={{ fontSize: 'clamp(0.88rem,1.4vw,1rem)', color: '#E8E2D3', lineHeight: 1.3, marginBottom: '0.85rem' }}
-            >
-              Par les Lois
-            </h2>
+            <div className="flex items-center" style={{ gap: '0.7rem', marginBottom: '0.85rem' }}>
+              <ChamberMark slug="lois" size={18} color="rgba(207,174,106,0.55)" />
+              <h2
+                className="font-cinzel font-semibold"
+                style={{ fontSize: 'clamp(0.88rem,1.4vw,1rem)', color: '#E8E2D3', lineHeight: 1.3 }}
+              >
+                Par les Lois
+              </h2>
+            </div>
             <p
               className="font-manrope"
               style={{ fontSize: '13px', color: 'rgba(232,226,211,0.42)', lineHeight: 1.8, marginBottom: '0.75rem' }}
@@ -149,10 +153,11 @@ export default async function SanctuairePage() {
           <div>
             <Link
               href="/chambres/figures"
-              className="font-cinzel transition-colors duration-300 hover:text-[#CFAE6A]"
-              style={{ fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(232,226,211,0.5)', textDecoration: 'none', display: 'block', marginBottom: '0.4rem' }}
+              className="font-cinzel transition-colors duration-300 hover:text-[#CFAE6A] flex items-center"
+              style={{ fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(232,226,211,0.5)', textDecoration: 'none', marginBottom: '0.4rem', gap: '0.6rem' }}
             >
-              Par les Figures →
+              <ChamberMark slug="figures" size={14} />
+              <span>Par les Figures →</span>
             </Link>
             <p
               className="font-manrope"
@@ -165,10 +170,11 @@ export default async function SanctuairePage() {
           <div>
             <Link
               href="/chambres/oeuvres"
-              className="font-cinzel transition-colors duration-300 hover:text-[#CFAE6A]"
-              style={{ fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(232,226,211,0.5)', textDecoration: 'none', display: 'block', marginBottom: '0.4rem' }}
+              className="font-cinzel transition-colors duration-300 hover:text-[#CFAE6A] flex items-center"
+              style={{ fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(232,226,211,0.5)', textDecoration: 'none', marginBottom: '0.4rem', gap: '0.6rem' }}
             >
-              Par les Œuvres →
+              <ChamberMark slug="oeuvres" size={14} />
+              <span>Par les Œuvres →</span>
             </Link>
             <p
               className="font-manrope"

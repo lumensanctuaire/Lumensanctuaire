@@ -64,7 +64,7 @@ export default function ParcoursPage() {
                 }}
               >
                 <div
-                  className="absolute inset-0 pointer-events-none glow-breathe"
+                  className="absolute inset-0 pointer-events-none"
                   style={{ background: `radial-gradient(ellipse 80% 60% at 15% 15%, ${a.bg} 0%, transparent 65%)` }}
                 />
                 {/* Large roman numeral background */}

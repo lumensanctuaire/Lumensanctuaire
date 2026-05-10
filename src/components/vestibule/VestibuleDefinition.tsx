@@ -30,7 +30,89 @@ const dimensions = [
   },
 ]
 
+type Dimension = typeof dimensions[number]
+
+function DimensionCard({ rang, nom, accroche, corps, couleur, bordure, chambres }: Dimension) {
+  return (
+    <div
+      className="relative flex flex-col overflow-hidden"
+      style={{
+        background: `linear-gradient(160deg, ${couleur} 0%, transparent 55%)`,
+        border: `1px solid ${bordure}`,
+        padding: '2rem 1.75rem',
+        minHeight: '260px',
+      }}
+    >
+      <span
+        className="absolute bottom-3 right-4 font-cinzel font-semibold select-none pointer-events-none"
+        style={{ fontSize: '5rem', color: 'rgba(232,226,211,0.04)', lineHeight: 1 }}
+      >
+        {rang}
+      </span>
+
+      <p
+        className="font-cinzel"
+        style={{
+          fontSize: '9px',
+          letterSpacing: '0.38em',
+          textTransform: 'uppercase',
+          color: 'rgba(207,174,106,0.5)',
+          marginBottom: '0.5rem',
+        }}
+      >
+        Dimension {rang}
+      </p>
+
+      <h3
+        className="font-cinzel"
+        style={{
+          fontSize: 'clamp(1rem, 1.6vw, 1.15rem)',
+          color: '#E8E2D3',
+          lineHeight: 1.3,
+          marginBottom: '0.5rem',
+        }}
+      >
+        {nom}
+      </h3>
+
+      <p
+        className="font-cinzel"
+        style={{
+          fontSize: '11px',
+          color: 'rgba(207,174,106,0.5)',
+          lineHeight: 1.5,
+          marginBottom: '1rem',
+        }}
+      >
+        {accroche}
+      </p>
+
+      <p
+        className="font-manrope"
+        style={{ fontSize: '13px', color: 'rgba(232,226,211,0.38)', lineHeight: 1.8, flex: 1 }}
+      >
+        {corps}
+      </p>
+
+      <p
+        className="font-cinzel"
+        style={{
+          fontSize: '9px',
+          letterSpacing: '0.28em',
+          textTransform: 'uppercase',
+          color: '#6B5B8E',
+          marginTop: '1.5rem',
+        }}
+      >
+        {chambres}
+      </p>
+    </div>
+  )
+}
+
 export default function VestibuleDefinition() {
+  const [dimI, ...dimRest] = dimensions
+
   return (
     <section className="py-28" style={{ background: '#02040A' }}>
       <div className="max-w-[860px] mx-auto px-6">
@@ -65,82 +147,15 @@ export default function VestibuleDefinition() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {dimensions.map(({ rang, nom, accroche, corps, couleur, bordure, chambres }) => (
-            <div
-              key={rang}
-              className="relative flex flex-col overflow-hidden"
-              style={{
-                background: `linear-gradient(160deg, ${couleur} 0%, transparent 55%)`,
-                border: `1px solid ${bordure}`,
-                padding: '2rem 1.75rem',
-                minHeight: '260px',
-              }}
-            >
-              <span
-                className="absolute bottom-3 right-4 font-cinzel font-semibold select-none pointer-events-none"
-                style={{ fontSize: '5rem', color: 'rgba(232,226,211,0.025)', lineHeight: 1 }}
-              >
-                {rang}
-              </span>
+        {/* Dim I — fondatrice, pleine largeur */}
+        <div style={{ marginBottom: '1.75rem' }}>
+          <DimensionCard {...dimI} />
+        </div>
 
-              <p
-                className="font-cinzel"
-                style={{
-                  fontSize: '9px',
-                  letterSpacing: '0.38em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(207,174,106,0.5)',
-                  marginBottom: '0.5rem',
-                }}
-              >
-                Dimension {rang}
-              </p>
-
-              <h3
-                className="font-cinzel"
-                style={{
-                  fontSize: 'clamp(1rem, 1.6vw, 1.15rem)',
-                  color: '#E8E2D3',
-                  lineHeight: 1.3,
-                  marginBottom: '0.5rem',
-                }}
-              >
-                {nom}
-              </h3>
-
-              <p
-                className="font-cinzel"
-                style={{
-                  fontSize: '11px',
-                  color: 'rgba(207,174,106,0.5)',
-                  lineHeight: 1.5,
-                  marginBottom: '1rem',
-                }}
-              >
-                {accroche}
-              </p>
-
-              <p
-                className="font-manrope"
-                style={{ fontSize: '13px', color: 'rgba(232,226,211,0.38)', lineHeight: 1.8, flex: 1 }}
-              >
-                {corps}
-              </p>
-
-              <p
-                className="font-cinzel"
-                style={{
-                  fontSize: '9px',
-                  letterSpacing: '0.28em',
-                  textTransform: 'uppercase',
-                  color: '#6B5B8E',
-                  marginTop: '1.5rem',
-                }}
-              >
-                {chambres}
-              </p>
-            </div>
+        {/* Dim II + III — duo, empilé sur mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {dimRest.map((dim) => (
+            <DimensionCard key={dim.rang} {...dim} />
           ))}
         </div>
       </div>
